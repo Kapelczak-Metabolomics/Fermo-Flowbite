@@ -1,25 +1,33 @@
 FROM python:3.11-slim
 
-# Set environment
+# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+
+# Set work directory
 WORKDIR /app
 
-# System deps
+# Install system dependencies
 RUN apt-get update && apt-get install -y curl git build-essential
 
-# Node.js for Tailwind build
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&     apt-get install -y nodejs
+# Install Node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs
 
-# Copy app
+# Copy project files
 COPY . .
 
-# Install Python and JS dependencies
-RUN pip install --upgrade pip && pip install -r fermo_gui/requirements.txt
+# Set work directory to fermo_gui
+WORKDIR /app/fermo_gui
+
+# Install Python dependencies
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+# Install Node.js dependencies and build frontend
 RUN npm install && npm run build
 
 # Expose port
-EXPOSE 5000
+EXPOSE 8000
 
-# Run
-CMD ["python", "fermo_gui/run.py"]
+# Start the application
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

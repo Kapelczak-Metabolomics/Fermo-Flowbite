@@ -1,0 +1,12 @@
+{
+  "name": "fermo-frontend",
+  "version": "1.0.0",
+  "description": "Tailwind + Flowbite frontend for FERMO",
+  "scripts": {
+    "build": "tailwindcss -i ./fermo_gui/fermo_gui/static/css/input.css -o ./fermo_gui/fermo_gui/static/css/tailwind.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "flowbite": "^1.6.5"
+  }
+}

@@ -6,3 +6,16 @@
   celery
   flask_mail
   jsonschema
+  gevent
+  coloredlogs
+  email-validator
+  fermo_core
+  Flask-WTF
+  Flask-Mail
+  pydantic
+  requests
+  black
+  isort
+  pre-commit
+  pytest-flask
+  ruff

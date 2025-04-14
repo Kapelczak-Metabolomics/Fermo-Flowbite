@@ -27,7 +27,7 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 RUN npm install && npm run build
 
 # Expose port
-EXPOSE 8000
+EXPOSE 5000
 
 # Start the application
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "fermo_gui.run:app"]
